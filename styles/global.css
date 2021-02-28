@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.episode {
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+}
+
+.epititle {
+  font-weight: bolder;
+  font-size: larger;
+}
+
+.pubdate {
+  font-weight: lighter;
+  font-size: small;
+}
+
+.highlight {
+  background-color: #ffd54f;
+  padding-left: 0em;
+  padding-right: 0em;
+}

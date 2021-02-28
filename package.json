@@ -1,5 +1,5 @@
 {
-  "name": "rebuildshownotesfilter",
+  "name": "rebuildshownotesfilter-nextjs",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,8 +8,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "bootstrap": "^4.6.0",
+    "html-escaper": "^3.0.3",
+    "moment": "^2.29.1",
     "next": "10.0.7",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-bootstrap": "^1.5.0",
+    "react-dom": "17.0.1",
+    "react-highlight-words": "^0.17.0",
+    "react-moment": "^1.1.1"
   }
 }

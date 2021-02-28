@@ -1,65 +1,67 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Episode from '../components/Episode'
+import Header from '../components/Header'
+import { useState, useEffect, useRef } from 'react'
+import { Container, Row, Col, Form } from 'react-bootstrap'
+import { escape, unescape } from 'html-escaper'
 
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+async function getEpisodes() {
+  const endpoint = `https://tamanishi.net/rebuildshownotesfilter3/shownotes-json`
+  const res = await fetch(endpoint)
+  const json = await res.json()
+  return json.episodes
+}
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+export async function getStaticProps() {
+  const episodes = await getEpisodes()
+  return {
+    props: {
+      fullEpisodes: episodes,
+    }
+  }
+}
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+export default function Index(props) {
+  const [filteredEpisodes, setFilteredEpisodes] = useState(props.fullEpisodes)
+  const [query, setQuery] = useState("")
+  const intervalRef = useRef(null)
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+  useEffect(
+    () => {
+      intervalRef.current = setTimeout(() => {
+        if (query) {
+          const filtered = props.fullEpisodes.map(episode => ({
+            ...episode,
+            shownotes: episode.shownotes
+              .filter(shownote => shownote.title.toLowerCase().includes(escape(query.toLowerCase())))
+          }))
+          .filter(episode => episode.shownotes.length > 0)
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+          setFilteredEpisodes(filtered)
+        } else {
+          setFilteredEpisodes(props.fullEpisodes)
+        }
+      },
+      500)
+      return () => clearTimeout(intervalRef.current)
+    },
+    [query]
   )
+
+  return (
+      <>
+        <Head>
+          <title>Rebuild Shownotes Filter</title>
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          {/* Cloudflare Web Analytics */}
+            <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c97ca1a072c64347840c289ee37a04e6"}' />
+          {/* End Cloudflare Web Analytics */}
+        </Head>
+        <Container>
+          <Header />
+          <Row><Col xs="3"><Form.Control type='text' placeholder='query' onChange={ e => setQuery(e.target.value) } /></Col></Row>
+            { filteredEpisodes.map((episode, i) => <Episode episode={ episode } query={ query } key={ i } />)}
+        </Container>
+      </>
+  );
 }
