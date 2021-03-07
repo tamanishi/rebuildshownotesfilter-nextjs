@@ -1,4 +1,4 @@
-import Head from 'next/head'
+]import Head from 'next/head'
 import Episode from '../components/Episode'
 import Header from '../components/Header'
 import { useState, useEffect, useRef } from 'react'
@@ -7,7 +7,8 @@ import { escape, unescape } from 'html-escaper'
 
 async function getEpisodes() {
   // const endpoint = `https://tamanishi.net/rebuildshownotesfilter3/shownotes-json`
-  const endpoint = `https://raw.githubusercontent.com/tamanishi/rebuild-shownotes-json/master/episodes.json`
+  // const endpoint = `https://raw.githubusercontent.com/tamanishi/rebuild-shownotes-json/master/episodes.json`
+  const endpoint = `https://rebuild-shownotes-json.tamanishi.workers.dev/`
   const res = await fetch(endpoint)
   const json = await res.json()
   return json.episodes
