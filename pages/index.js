@@ -1,4 +1,4 @@
-]import Head from 'next/head'
+import Head from 'next/head'
 import Episode from '../components/Episode'
 import Header from '../components/Header'
 import { useState, useEffect, useRef } from 'react'
