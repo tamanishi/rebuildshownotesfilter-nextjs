@@ -6,8 +6,6 @@ import { Container, Row, Col, Form } from 'react-bootstrap'
 import { escape, unescape } from 'html-escaper'
 
 async function getEpisodes() {
-  // const endpoint = `https://tamanishi.net/rebuildshownotesfilter3/shownotes-json`
-  // const endpoint = `https://raw.githubusercontent.com/tamanishi/rebuild-shownotes-json/master/episodes.json`
   const endpoint = `https://rebuild-shownotes-json.tamanishi.workers.dev/`
   const res = await fetch(endpoint)
   const json = await res.json()
