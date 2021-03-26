@@ -54,9 +54,9 @@ export default function Index(props) {
         <Head>
           <title>Rebuild Shownotes Filter</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-          {/* Cloudflare Web Analytics */}
-            <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c97ca1a072c64347840c289ee37a04e6"}' />
-          {/* End Cloudflare Web Analytics */}
+          { /* Cloudflare Web Analytics */ }
+          <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "34dc3c5f1435491fb76024f7e2f2e5b4"}'></script>
+          { /* End Cloudflare Web Analytics */ }
         </Head>
         <Container>
           <Header />
