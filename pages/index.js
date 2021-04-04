@@ -43,7 +43,7 @@ export default function Index(props) {
           setFilteredEpisodes(props.fullEpisodes)
         }
       },
-      500)
+      300)
       return () => clearTimeout(intervalRef.current)
     },
     [query]
