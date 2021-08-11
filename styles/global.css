@@ -23,3 +23,10 @@ body {
   background-color: #ffd54f;
   padding: 0em;
 }
+
+a:not([class]) {
+  text-decoration: none;
+}
+a:not([class]):hover {
+  text-decoration: underline;
+}
