@@ -11,12 +11,16 @@ body {
 
 .epititle {
   font-weight: bolder;
-  font-size: larger;
+  font-size: x-large;
 }
 
 .pubdate {
   font-weight: lighter;
   font-size: small;
+}
+
+.shownote {
+  font-size: medium;
 }
 
 .highlight {
