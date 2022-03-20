@@ -37,11 +37,9 @@ jobs:
       - name: notify success
         if: ${{ success() }}
         run: |
-          curl -X POST -H "Content-Type: application/json" -d '{"value1": "tamanishi/rebuildshownotesfilter-nextjs", "value2": "succeeded"}' https://maker.ifttt.com/trigger/update_rebuild_json/with/key/${{ secrets.WEB_HOOK_KEY }}
+          curl -X POST -H "Content-Type: application/json" -d '{"value1": ${{ github.repository }}, "value2": "succeeded"}' https://maker.ifttt.com/trigger/update_rebuild_json/with/key/${{ secrets.WEB_HOOK_KEY }}
 
       - name: notify fail
         if: ${{ failure() }}
         run: |
-          curl -X POST -H "Content-Type: application/json" -d '{"value1": "tamanishi/rebuildshownotesfilter-nextjs", "value2": "failed"}' https://maker.ifttt.com/trigger/update_rebuild_json/with/key/${{ secrets.WEB_HOOK_KEY }}
-      
-      
+          curl -X POST -H "Content-Type: application/json" -d '{"value1": ${{ github.repository }}, "value2": "failed"}' https://maker.ifttt.com/trigger/update_rebuild_json/with/key/${{ secrets.WEB_HOOK_KEY }}
