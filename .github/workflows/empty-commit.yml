@@ -33,3 +33,7 @@ jobs:
           git config user.email github-actions@github.com
           git commit --allow-empty -m "update episodes"
           git push
+
+      - name: notify
+        run: |
+          curl -X POST -H "Content-Type: application/json" -d '{"this":[{"is":{"some":["test","data"]}}]}' https://maker.ifttt.com/trigger/update_rebuild_json/json/with/key/${{ secrets.WEB_HOOK_KEY }}
