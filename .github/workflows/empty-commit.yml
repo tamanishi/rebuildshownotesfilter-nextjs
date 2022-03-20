@@ -34,6 +34,14 @@ jobs:
           git commit --allow-empty -m "update episodes"
           git push
 
-      - name: notify
+      - name: notify success
+        if: ${{ success() }}
         run: |
-          curl -X POST -H "Content-Type: application/json" -d '{"this":[{"is":{"some":["test","data"]}}]}' https://maker.ifttt.com/trigger/update_rebuild_json/json/with/key/${{ secrets.WEB_HOOK_KEY }}
+          curl -X POST -H "Content-Type: application/json" -d '{"value1": "tamanishi/rebuildshownotesfilter-nextjs", "value2": "succeeded"}' https://maker.ifttt.com/trigger/update_rebuild_json/with/key/${{ secrets.WEB_HOOK_KEY }}
+
+      - name: notify fail
+        if: ${{ failure() }}
+        run: |
+          curl -X POST -H "Content-Type: application/json" -d '{"value1": "tamanishi/rebuildshownotesfilter-nextjs", "value2": "failed"}' https://maker.ifttt.com/trigger/update_rebuild_json/with/key/${{ secrets.WEB_HOOK_KEY }}
+      
+      
