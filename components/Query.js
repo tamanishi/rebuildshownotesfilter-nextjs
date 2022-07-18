@@ -5,6 +5,6 @@ export default function Query({ setQuery }) {
     const [,render]=useState()
 
     return (
-        <Row><Col xs="3"><Form.Control type='text' placeholder='query' onChange={e => { render(); console.log('rendered'); setQuery(e.target.value); }} /></Col></Row>
+        <Row><Col xs="3"><Form.Control type='text' placeholder='query' onChange={e => { render(); setQuery(e.target.value); }} /></Col></Row>
     );
 }
