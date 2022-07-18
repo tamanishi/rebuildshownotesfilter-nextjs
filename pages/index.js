@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import Episode from '../components/Episode'
 import Header from '../components/Header'
+import Query from '../components/Query'
 import { useState, useEffect, useRef } from 'react'
-import { Container, Row, Col, Form } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import { escape, unescape } from 'html-escaper'
 
 async function getEpisodes() {
@@ -60,7 +61,7 @@ export default function Index(props) {
         </Head>
         <Container>
           <Header />
-          <Row><Col xs="3"><Form.Control type='text' placeholder='query' onChange={ e => setQuery(e.target.value) } /></Col></Row>
+          <Query setQuery={ setQuery } />
             { filteredEpisodes.map((episode, i) => <Episode episode={ episode } query={ query } key={ i } />)}
         </Container>
       </>
