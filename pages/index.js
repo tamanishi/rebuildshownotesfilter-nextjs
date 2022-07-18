@@ -37,47 +37,46 @@ export default function Index(props) {
             shownotes: episode.shownotes
               .filter(shownote => shownote.title.toLowerCase().includes(escape(query.toLowerCase())))
           }))
-          .filter(episode => episode.shownotes.length > 0)
+            .filter(episode => episode.shownotes.length > 0)
 
           const filteredByTitle = props.fullEpisodes.map(episode => ({
             ...episode,
             shownotes: episode.shownotes
               .filter(shownote => shownote.title.toLowerCase().includes(escape(query.toLowerCase())))
           }))
-          .filter(episode => episode.shownotes.length == 0)
-          .filter(episode => (episode.title.toLowerCase().includes(escape(query.toLowerCase()))))
+            .filter(episode => episode.shownotes.length == 0)
+            .filter(episode => (episode.title.toLowerCase().includes(escape(query.toLowerCase()))))
 
-          const concated = [...filteredByShownote, ...filteredByTitle]
-          const map = new Map(concated.map(episode => [episode.title, episode]));
-          const filtered = Array.from(map.values()).sort((a, b) => {
-            return a.publicationDate > b.publicationDate ? -1 : 1
-          })
+          const filtered = [...filteredByShownote, ...filteredByTitle]
+            .sort((a, b) => {
+              return a.publicationDate > b.publicationDate ? -1 : 1
+            })
 
           setFilteredEpisodes(filtered)
         } else {
           setFilteredEpisodes(props.fullEpisodes)
         }
       },
-      300)
+        300)
       return () => clearTimeout(intervalRef.current)
     },
     [query]
   )
 
   return (
-      <>
-        <Head>
-          <title>Rebuild Shownotes Filter</title>
-          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-          { /* Cloudflare Web Analytics */ }
-          <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "34dc3c5f1435491fb76024f7e2f2e5b4"}'></script>
-          { /* End Cloudflare Web Analytics */ }
-        </Head>
-        <Container>
-          <Header />
-          <Query setQuery={ setQuery } />
-            { filteredEpisodes.map((episode, i) => <Episode episode={ episode } query={ query } key={ i } />)}
-        </Container>
-      </>
+    <>
+      <Head>
+        <title>Rebuild Shownotes Filter</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        { /* Cloudflare Web Analytics */}
+        <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "34dc3c5f1435491fb76024f7e2f2e5b4"}'></script>
+        { /* End Cloudflare Web Analytics */}
+      </Head>
+      <Container>
+        <Header />
+        <Query setQuery={setQuery} />
+        {filteredEpisodes.map((episode, i) => <Episode episode={episode} query={query} key={i} />)}
+      </Container>
+    </>
   );
 }
