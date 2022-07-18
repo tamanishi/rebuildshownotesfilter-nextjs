@@ -9,13 +9,14 @@
   },
   "dependencies": {
     "bootstrap": "^5.1.1",
+    "escape-string-regexp": "^5.0.0",
     "html-escaper": "^3.0.3",
-    "moment": "^2.29.1",
-    "next": "^12.0.2",
-    "react": "17.0.2",
-    "react-bootstrap": "^2.0.0-beta.6",
-    "react-dom": "^17.0.2",
-    "react-highlight-words": "^0.17.0",
-    "react-moment": "^1.1.1"
+    "moment": "^2.29.4",
+    "next": "^12.2.2",
+    "react": "18.2.0",
+    "react-bootstrap": "^2.4.0",
+    "react-dom": "^18.2.0",
+    "react-highlight-words": "^0.18.0",
+    "react-moment": "^1.1.2"
   }
 }
