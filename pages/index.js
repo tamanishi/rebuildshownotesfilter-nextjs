@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import Episode from '../components/Episode'
 import Header from '../components/Header'
+import Query from '../components/Query'
 import { useState, useEffect, useRef } from 'react'
-import { Container, Row, Col, Form } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import { escape, unescape } from 'html-escaper'
 
 async function getEpisodes() {
@@ -52,7 +53,7 @@ export default function Index(props) {
   return (
       <>
         <Head>
-          <title>Rebuild Shownotes Filter</title>
+          <title>Rebuild Shownotes Filter</title> 
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           { /* Cloudflare Web Analytics */ }
           <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "34dc3c5f1435491fb76024f7e2f2e5b4"}'></script>
@@ -60,7 +61,7 @@ export default function Index(props) {
         </Head>
         <Container>
           <Header />
-          <Row><Col xs="3"><Form.Control type='text' placeholder='query' onChange={ e => setQuery(e.target.value) } /></Col></Row>
+          <Query setQuery={ setQuery } />
             { filteredEpisodes.map((episode, i) => <Episode episode={ episode } query={ query } key={ i } />)}
         </Container>
       </>
