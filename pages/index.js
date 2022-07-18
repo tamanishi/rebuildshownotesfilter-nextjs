@@ -32,12 +32,26 @@ export default function Index(props) {
     () => {
       intervalRef.current = setTimeout(() => {
         if (query) {
-          const filtered = props.fullEpisodes.map(episode => ({
+          const filteredByShownote = props.fullEpisodes.map(episode => ({
             ...episode,
             shownotes: episode.shownotes
               .filter(shownote => shownote.title.toLowerCase().includes(escape(query.toLowerCase())))
           }))
           .filter(episode => episode.shownotes.length > 0)
+
+          const filteredByTitle = props.fullEpisodes.map(episode => ({
+            ...episode,
+            shownotes: episode.shownotes
+              .filter(shownote => shownote.title.toLowerCase().includes(escape(query.toLowerCase())))
+          }))
+          .filter(episode => episode.shownotes.length == 0)
+          .filter(episode => (episode.title.toLowerCase().includes(escape(query.toLowerCase()))))
+
+          const concated = [...filteredByShownote, ...filteredByTitle]
+          let map = new Map(concated.map(episode => [episode.title, episode]));
+          let filtered = Array.from(map.values()).sort((a, b) => {
+            return a.publicationDate > b.publicationDate ? -1 : 1
+          })
 
           setFilteredEpisodes(filtered)
         } else {
