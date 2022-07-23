@@ -64,7 +64,7 @@ export default function Index(props) {
   )
 
   return (
-    <div>
+    <>
       <Head>
         <title>Rebuild Shownotes Filter</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -77,6 +77,6 @@ export default function Index(props) {
         <Query setQuery={setQuery} />
         {filteredEpisodes.map((episode, i) => <Episode episode={episode} query={query} key={i} />)}
       </Container>
-    </div>
+    </>
   );
 }
