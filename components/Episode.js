@@ -10,7 +10,7 @@ export default function Episode({ episode, query }) {
     <div className='episode'>
       <a className='epititle' href={ episode.mediaUrl } target='_blank' rel='noopner noreferrer'><Highlighter highlightClassName='highlight' searchWords={ [ escapeStringRegexp(query) ] } textToHighlight={ unescape(episode.title).replace(/&nbsp;/g, ' ') } /></a> 
       {/* <span className='pubdate'>(<Moment format='YYYY/MM/DD'>{ episode.publicationDate }</Moment>)</span> */}
-      <span className='pubdate'>(episode.publicationDate)</span>
+      <span className='pubdate'>({ episode.publicationDate })</span>
       <ul>{ episode.shownotes.map((shownote, i) => <Shownote shownote={ shownote } query={ query } key={ i } />)}</ul>
     </div>
   );
