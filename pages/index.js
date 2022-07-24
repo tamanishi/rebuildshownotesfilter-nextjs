@@ -76,7 +76,7 @@ export default function Index(props) {
         {filteredEpisodes.map((episode, i) => <Episode episode={episode} query={query} key={i} />)}
       </Container>
       { /* Cloudflare Web Analytics */}
-        <Script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "34dc3c5f1435491fb76024f7e2f2e5b4"}' /        >
+        <Script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "34dc3c5f1435491fb76024f7e2f2e5b4"}' />
       { /* End Cloudflare Web Analytics */}
     </>
   );
