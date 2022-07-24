@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Script from 'next/script'
 import Episode from '../components/Episode'
 import Header from '../components/Header'
 import Query from '../components/Query'
@@ -68,15 +69,15 @@ export default function Index(props) {
       <Head>
         <title>Rebuild Shownotes Filter</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        { /* Cloudflare Web Analytics */}
-        <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "34dc3c5f1435491fb76024f7e2f2e5b4"}'></script>
-        { /* End Cloudflare Web Analytics */}
       </Head>
       <Container>
         <Header />
         <Query setQuery={setQuery} />
         {filteredEpisodes.map((episode, i) => <Episode episode={episode} query={query} key={i} />)}
       </Container>
+      { /* Cloudflare Web Analytics */}
+        <Script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "34dc3c5f1435491fb76024f7e2f2e5b4"}' /        >
+      { /* End Cloudflare Web Analytics */}
     </>
   );
 }
